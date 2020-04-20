@@ -19,7 +19,7 @@ def func_exit():
 def func_zoom():
     value = askinteger("확대배수", "확대할 배수를 입력하세요(2~8)", minvalue=2, maxvalue=8)  # 확대할 배수 입력
     photo = PhotoImage(file=filename)  # func_open에서 선택된 파일
-    photo = photo.zoom(value, value)  # 이미지 확대
+    photo = photo.zoom(value, value)  # 이미지 확대하기
     pLabel.configure(image=photo)  # 윈도창에 나타내기
     pLabel.image = photo
 
