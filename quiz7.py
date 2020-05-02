@@ -57,6 +57,20 @@ def func_open() :
 
         canvas.pack()
 
+    else:
+        # 파일 -> 메모리
+        loadImage(filename)
+
+        window.geometry(str(XSIZE) + 'x' + str(YSIZE))  # 윈도창 크기
+        canvas = Canvas(window, height = XSIZE, width = YSIZE)
+        paper = PhotoImage(width = XSIZE, height = YSIZE)
+        canvas.create_image((XSIZE / 2, YSIZE / 2), image = paper, state = "normal")
+
+        #메모리 --> 화면
+        displayImage(inImage)
+
+        canvas.pack()
+
 def func_exit() :
     window.quit()
     window.destroy()
@@ -107,6 +121,7 @@ def reversePhoto() :
 ## 전역 변수 선언 부분 ##
 window = None
 canvas = None
+paper = None
 XSIZE, YSIZE = 0, 0
 inImage = []    #2차원 리스트(메모리)
 filename = ''   #파일명(전역 변수)
