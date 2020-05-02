@@ -57,6 +57,15 @@ def darkPhoto() :
 
 
 def reversePhoto() :
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
+
+    for i in range(0, XSIZE) :
+        for k in range(0, YSIZE) :
+            data = inImage[i][k]
+            newData = 255 - data
+            inImage[i][k] = newData
+
+    displayImage(inImage)
 
 
 ## 전역 변수 선언 부분 ##
