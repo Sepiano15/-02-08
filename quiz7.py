@@ -31,7 +31,7 @@ def displayImage(image) :
         for k in range(0, YSIZE) :
             data = image[i][k]
             tmpString += "#%02x%02x%02x " % (data, data, data)
-        rgbString += "{" + tmpString + "}"
+        rgbString += "{" + tmpString + "} "
     paper.put(rgbString)
 
 def func_open() :
