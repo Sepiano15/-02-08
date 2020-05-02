@@ -6,7 +6,22 @@ import math
 
 ## 함수 선언 부분 ##
 def loadImage(fname) :
-  
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
+
+    inImage = []
+    fsize = os.path.getsize(fname)  # 파일의 크기
+    XSIZE = YSIZE = int(math.sqrt(fsize))   # 정방형으로 가정하고 크기 구함
+
+    fp = open(fname, 'rb')
+
+    for i in range(0, XSIZE) :
+        tmpList = []
+        for k in range(0, YSIZE) :
+            data = int(ord(fp.read(1)))
+            tmpList.append(data)
+        inImage.append(tmpList)
+
+    fp.close()
 
 def displayImage(image) :
  
@@ -33,6 +48,20 @@ def func_open() :
 
         canvas.pack()
 
+        # 파일 -> 메모리
+        loadImage(filename)
+
+        window.geometry(str(XSIZE) + 'x' + str(YSIZE))  # 윈도창 크기
+        canvas = Canvas(window, height = XSIZE, width = YSIZE)
+        paper = PhotoImage(width = XSIZE, height = YSIZE)
+        canvas.create_image((XSIZE / 2, YSIZE / 2), image = paper, state = "normal")
+
+        #메모리 --> 화면
+        displayImage(inImage)
+
+        canvas.pack()
+
+    else:
         # 파일 -> 메모리
         loadImage(filename)
 
