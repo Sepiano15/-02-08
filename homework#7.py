@@ -83,7 +83,20 @@ def brightPhoto() :
 
 
 def darkPhoto() :
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
+    value = 0
+    value = askinteger('어둡게', '값 입력', minvalue = 1, maxvalue = 255)
 
+    for i in range(0, XSIZE) :
+        for k in range(0, YSIZE) :
+            data = inImage[i][k] - value
+            if data < 0 :
+                newData = 0
+            else :
+                newData = data
+            inImage[i][k] = newData
+
+    displayImage(inImage)
 
 def reversePhoto() :
     global window, canvas, paper, filename, XSIZE, YSIZE, inImage
