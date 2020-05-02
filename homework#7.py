@@ -24,6 +24,15 @@ def loadImage(fname) :
     fp.close()
 
 def displayImage(image) :
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
+    rgbString = ""
+    for i in range(0, XSIZE) :
+        tmpString = ""
+        for k in range(0, YSIZE) :
+            data = image[i][k]
+            tmpString += "#%02x%02x%02x " % (data, data, data)
+        rgbString += "{" + tmpString + "} "
+    paper.put(rgbString)
  
 def func_open() :
      global window, canvas, paper, filename, XSIZE, YSIZE, inImage
@@ -80,7 +89,20 @@ def func_exit() :
     window.destroy()
 
 def brightPhoto() :
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage, filename
+    value = 0
+    value = askinteger('밝게', '값 입력', minvalue = 1, maxvalue = 255)
+    
+    for i in range(0, XSIZE) :
+        for k in range(0, YSIZE) :
+            data = inImage[i][k] + value
+            if data > 255 :
+                newData = 255
+            else :
+                newData = data
+            inImage[i][k] = newData
 
+    displayImage(inImage)
 
 def darkPhoto() :
     global window, canvas, paper, filename, XSIZE, YSIZE, inImage
@@ -99,15 +121,6 @@ def darkPhoto() :
     displayImage(inImage)
 
 def reversePhoto() :
-    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
-
-    for i in range(0, XSIZE) :
-        for k in range(0, YSIZE) :
-            data = inImage[i][k]
-            newData = 255 - data
-            inImage[i][k] = newData
-
-    displayImage(inImage)
 
 
 ## 전역 변수 선언 부분 ##
