@@ -56,20 +56,6 @@ def func_open() :
         displayImage(inImage)
 
         canvas.pack()
-
-        # 파일 -> 메모리
-        loadImage(filename)
-
-        window.geometry(str(XSIZE) + 'x' + str(YSIZE))  # 윈도창 크기
-        canvas = Canvas(window, height = XSIZE, width = YSIZE)
-        paper = PhotoImage(width = XSIZE, height = YSIZE)
-        canvas.create_image((XSIZE / 2, YSIZE / 2), image = paper, state = "normal")
-
-        #메모리 --> 화면
-        displayImage(inImage)
-
-        canvas.pack()
-
     else:
         # 파일 -> 메모리
         loadImage(filename)
@@ -121,7 +107,15 @@ def darkPhoto() :
     displayImage(inImage)
 
 def reversePhoto() :
+    global window, canvas, paper, filename, XSIZE, YSIZE, inImage
 
+    for i in range(0, XSIZE) :
+        for k in range(0, YSIZE) :
+            data = inImage[i][k]
+            newData = 255 - data
+            inImage[i][k] = newData
+
+    displayImage(inImage)
 
 ## 전역 변수 선언 부분 ##
 window = None
